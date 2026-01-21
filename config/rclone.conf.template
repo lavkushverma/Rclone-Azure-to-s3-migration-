@@ -1,0 +1,41 @@
+# Rclone Configuration Template
+# Copy this file to ~/.config/rclone/rclone.conf and update with your values
+
+[AZStorageAccount]
+type = azureblob
+# Replace with your Azure Storage Account name
+account = your-azure-storage-account-name
+# Update path to match your home directory
+# Amazon Linux: /home/ec2-user/.config/rclone/azure-principal.json
+# Ubuntu: /home/ubuntu/.config/rclone/azure-principal.json
+service_principal_file = /home/ec2-user/.config/rclone/azure-principal.json
+
+[s3]
+type = s3
+provider = AWS
+# Use IAM role attached to EC2 instance
+env_auth = true
+# Update with your AWS region
+region = ap-south-1
+
+# Optional: Configure for specific S3 bucket with credentials
+# Uncomment and configure if not using IAM role
+# [s3-with-creds]
+# type = s3
+# provider = AWS
+# env_auth = false
+# access_key_id = YOUR_ACCESS_KEY
+# secret_access_key = YOUR_SECRET_KEY
+# region = ap-south-1
+
+# Optional: Azure Storage with SAS token (alternative to Service Principal)
+# [AZStorageAccountSAS]
+# type = azureblob
+# account = your-storage-account
+# sas_url = https://your-account.blob.core.windows.net/?your-sas-token
+
+# Optional: Azure Storage with Account Key (alternative to Service Principal)
+# [AZStorageAccountKey]
+# type = azureblob
+# account = your-storage-account
+# key = your-account-key

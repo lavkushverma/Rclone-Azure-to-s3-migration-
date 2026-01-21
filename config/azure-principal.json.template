@@ -1,0 +1,5 @@
+{
+  "appId": "YOUR_APPLICATION_ID",
+  "password": "YOUR_PASSWORD_OR_SECRET",
+  "tenant": "YOUR_TENANT_ID"
+}
