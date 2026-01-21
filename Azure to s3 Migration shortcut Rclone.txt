@@ -1,0 +1,65 @@
+# Download rclone
+cd ~
+curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+
+# Unzip it
+unzip rclone-current-linux-amd64.zip
+
+# Copy to a directory in your PATH
+cd rclone-*-linux-amd64
+mkdir -p ~/bin
+cp rclone ~/bin/
+chmod +x ~/bin/rclone
+
+# Add to PATH (if not already there)
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# Verify installation
+rclone version
+
+
+EC2
+sudo -v ; curl https://rclone.org/install.sh | sudo bash
+mkdir -p ~/.config/rclone
+nano ~/.config/rclone/azure-principal.json
+
+Azure
+az ad sp create-for-rbac \
+  --name rclone-azure-sp \
+  --role "Storage Blob Data Reader" \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>/providers/Microsoft.Storage/storageAccounts/<Storage name>
+
+you will get this
+
+{
+  "appId": "06d81512-6769-4b21-8397-b4181143ed46",
+  "password": "2xq8Q~8CH_w0xfHwgBH1GwxY~VwAuJtWfjuwOauD",
+  "tenant": "eedb35ab-700a-4a39-9870-d3656b5fef95"
+}
+
+
+in EC2
+add ~/.config/rclone/rclone.conf
+
+[AZStorageAccount]
+type = azureblob
+account = azureother       #azure storage name
+service_principal_file = rooot/home/lavkush/azure-principal.json     #azure principal file full path
+
+[s3]
+type = s3
+provider = AWS
+env_auth = true
+region = ap-south-1              #add region 
+
+to check
+rclone listremotes
+rclone lsd AZStorageAccount:
+
+to copy
+rclone copy AZStorageAccount: s3:s3-acc-rbl --progress
+
+to check size
+rclone size AZStorageAccount:
+rclone size s3:
