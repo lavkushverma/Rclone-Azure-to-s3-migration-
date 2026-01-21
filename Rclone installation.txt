@@ -1,0 +1,58 @@
+lavkush [ ~ ]$ curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 25.7M  100 25.7M    0     0  8743k      0  0:00:03  0:00:03 --:--:-- 8744k
+
+lavkush [ ~ ]$ unzip rclone-current-linux-amd64.zip
+
+Archive:  rclone-current-linux-amd64.zip
+   creating: rclone-v1.72.1-linux-amd64/
+  inflating: rclone-v1.72.1-linux-amd64/rclone  
+  inflating: rclone-v1.72.1-linux-amd64/README.txt  
+  inflating: rclone-v1.72.1-linux-amd64/README.html  
+  inflating: rclone-v1.72.1-linux-amd64/rclone.1  
+  inflating: rclone-v1.72.1-linux-amd64/git-log.txt  
+  
+lavkush [ ~ ]$ 
+mkdir -p ~/bin
+cp rclone-*-linux-amd64/rclone ~/bin/
+chmod 755 ~/bin/rclone
+
+
+lavkush [ ~ ]$ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+
+source ~/.bashrc
+
+lavkush [ ~ ]$ rclone version
+rclone v1.72.1
+- os/version: azurelinux 3.0 (64 bit)
+- os/kernel: 6.1.124.1-microsoft-standard (x86_64)
+- os/type: linux
+- os/arch: amd64
+- go/version: go1.25.5
+- go/linking: static
+- go/tags: none
+lavkush [ ~ ]$ 
+
+
+# Download rclone
+cd ~
+curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+
+# Unzip it
+unzip rclone-current-linux-amd64.zip
+
+# Copy to a directory in your PATH
+cd rclone-*-linux-amd64
+mkdir -p ~/bin
+cp rclone ~/bin/
+chmod +x ~/bin/rclone
+
+# Add to PATH (if not already there)
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# Verify installation
+rclone version
